@@ -1,0 +1,23 @@
+Title: Active Directory Account Lockout Troubleshooting
+
+Issue: User reports they cannot log in, and the system says the account is locked out.
+
+Common Causes:
+1. Repeated failed login attempts (wrong password entered multiple times), often from a cached password on a phone or mapped drive after the user changed their password.
+2. A scheduled task or service running under the user's old credentials, retrying with the outdated password.
+3. Group Policy lockout threshold set too aggressively for the environment (e.g., 3 attempts).
+
+Resolution Steps:
+1. Open Active Directory Users and Computers (ADUC).
+2. Locate the user account under the correct OU.
+3. Right-click the account and select "Unlock Account".
+4. Ask the user to update saved credentials on any mobile devices, mapped network drives, or scheduled tasks that may still hold the old password.
+5. If lockouts recur repeatedly for the same user within a short period, check Event Viewer on the Domain Controller (Security log, Event ID 4740) to identify the source machine causing the failed attempts.
+6. If the source is a service account or scheduled task, update its stored credentials via Task Scheduler or the relevant service's logon settings.
+
+Prevention:
+- Set a reasonable account lockout threshold (5-10 attempts) via Group Policy under Account Lockout Policy.
+- Educate users to update saved passwords on all devices immediately after a password change.
+
+Escalation:
+If the lockout source cannot be identified after checking Event Viewer, escalate to Tier 2 for a full domain-wide audit using lockout status tools (e.g., Microsoft's Account Lockout Status tool - ALTools).

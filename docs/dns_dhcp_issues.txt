@@ -1,0 +1,28 @@
+Title: DNS and DHCP Troubleshooting Guide
+
+Issue: Users report "no internet access" or "cannot reach internal file server by name" while the network cable/WiFi shows connected.
+
+Step 1: Confirm the scope of the problem
+- Ask if this is affecting one user or multiple users on the same subnet/floor.
+- One user: likely a local IP/DNS cache issue.
+- Multiple users: likely a DHCP or DNS server issue.
+
+Step 2: Basic client-side checks
+1. Run `ipconfig /all` to confirm the machine received a valid IP address, subnet mask, gateway, and DNS server from DHCP.
+2. If the IP address starts with 169.254.x.x (APIPA), the machine failed to reach the DHCP server. Check physical network connection and switch port status.
+3. Run `ipconfig /flushdns` to clear a stale DNS cache.
+4. Run `nslookup <hostname>` to test whether DNS resolution is working for internal servers.
+
+Step 3: DHCP server checks (if multiple users affected)
+1. Open DHCP console on the server (dhcpmgmt.msc).
+2. Confirm the scope is active and has available leases remaining (not exhausted).
+3. Check for scope conflicts if a second DHCP server exists on the network unintentionally.
+
+Step 4: DNS server checks (if name resolution fails for multiple users)
+1. Open DNS Manager on the Domain Controller.
+2. Confirm the relevant A records and PTR records exist for internal servers.
+3. Check that DNS forwarders are correctly configured for external domain resolution.
+4. Restart the DNS Server service if records look correct but resolution still fails: `net stop dns` then `net start dns`.
+
+Escalation:
+If DHCP scope is healthy and DNS records are correct but the issue persists, escalate to Tier 2 to check for network switch/VLAN misconfiguration or firewall rules blocking DNS (port 53) or DHCP (ports 67/68) traffic.

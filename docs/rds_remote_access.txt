@@ -1,0 +1,29 @@
+Title: Remote Desktop Services (RDS) Access Troubleshooting
+
+Issue: User cannot connect to the RDS server remotely, or the connection drops repeatedly.
+
+Common Causes and Fixes:
+
+1. "Remote Desktop cannot connect" error
+   - Confirm the RDS server is powered on and the Remote Desktop Services role is running (services.msc -> Remote Desktop Services).
+   - Confirm the user account has permission to log in via RDP (added to "Remote Desktop Users" group on the server, or covered by Group Policy).
+   - Confirm the correct external port (default 3389, or custom port if changed for security) is open on the firewall/router.
+
+2. "Licensing" errors
+   - RDS requires a licensing server with valid CALs (Client Access Licenses). If licenses have expired or the licensing server is unreachable, users will be blocked after the grace period.
+   - Check the RD Licensing Manager for license availability and renew if expired.
+
+3. Session drops / freezes during use
+   - Usually caused by unstable WAN/internet connection on the client side, or server resource exhaustion (high CPU/RAM usage from too many concurrent sessions).
+   - Check Task Manager on the RDS server for resource usage during peak hours.
+   - Consider setting session timeout and idle disconnect policies via Group Policy to free up resources from inactive sessions.
+
+4. Black screen after login
+   - Often caused by a corrupted user profile on the RDS server.
+   - Resolution: rename the corrupted profile folder in C:\Users\ and have Windows recreate it on next login (user will need to reconfigure desktop preferences).
+
+Security Note:
+Never expose RDP directly to the internet without additional protection (VPN, Remote Desktop Gateway, or MFA). Direct RDP exposure is a common ransomware entry point.
+
+Escalation:
+If licensing and permissions are confirmed correct but access still fails, escalate to Tier 2 to review server-side RDP configuration and certificate issues.

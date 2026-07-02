@@ -1,0 +1,30 @@
+Title: Network Printer Troubleshooting Guide
+
+Issue: User cannot print, print jobs stuck in queue, or printer shows offline.
+
+Step 1: Basic Checks
+1. Confirm the printer is powered on and shows "Ready" on its own display panel.
+2. Confirm the printer's network cable is connected (for network printers) or USB cable (for local printers).
+3. Ping the printer's IP address from the affected PC to confirm network reachability.
+
+Step 2: Print Queue Issues
+1. Open the print queue on the affected PC (Settings -> Printers -> select printer -> Open Queue).
+2. If a job is stuck and blocking the queue, cancel it and restart the Print Spooler service:
+   - Open Services (services.msc)
+   - Locate "Print Spooler"
+   - Right-click -> Restart
+3. If the issue persists, clear the spooler folder manually: stop the Print Spooler service, delete contents of C:\Windows\System32\spool\PRINTERS\, then restart the service.
+
+Step 3: "Printer Offline" Status
+1. Confirm the printer's IP address hasn't changed (common if DHCP reassigned a new IP) - compare the printer's actual IP (from its display panel) against the IP configured in the printer driver on the PC.
+2. If the IP changed, either update the port IP in Printer Properties -> Ports, or assign a DHCP reservation to the printer so its IP never changes.
+
+Step 4: Driver Issues
+1. If print jobs fail with garbled output or errors, try removing and reinstalling the printer driver.
+2. Confirm the correct driver model is installed - using a generic or mismatched driver often causes formatting/quality issues.
+
+Best Practice:
+For office environments, always assign DHCP reservations (static leases) to printers to prevent recurring "offline" issues caused by IP address changes.
+
+Escalation:
+If the printer is reachable via ping but still won't accept jobs, escalate to Tier 2 to check for a firmware issue or corrupted print queue at the print server level.

@@ -1,0 +1,27 @@
+Title: WAN/LAN Connectivity Troubleshooting (MPLS, Leased Lines, PRI)
+
+Issue: Branch office or head office reports slow or dropped connectivity to central systems.
+
+Step 1: Identify Scope
+- Single user: likely a local LAN cable, switch port, or NIC issue.
+- Entire branch office: likely a WAN link issue (MPLS/Leased Line down or degraded).
+- Voice/calling issues specifically: likely a PRI line issue, separate from data WAN.
+
+Step 2: Local LAN Checks
+1. Confirm the affected PC's network cable and switch port with a known-working cable/port swap test.
+2. Check switch port status lights - amber/blinking often indicates a duplex mismatch or partial link issue.
+3. Run `ping <default gateway>` from the affected machine to confirm local LAN connectivity before assuming a WAN problem.
+
+Step 3: WAN Link Checks (MPLS/Leased Line)
+1. Check the WAN router's link status LED and interface status (via router console or management interface).
+2. Ping the WAN provider's near-end and far-end IP addresses (provided by the ISP) to isolate whether the issue is on the customer side or provider side.
+3. Check for recent configuration changes on the router (QoS policies, routing table changes) that may have caused the outage.
+4. If the link is confirmed down on the provider side, log a ticket with the ISP/MPLS provider and reference the circuit ID.
+
+Step 4: PRI (Voice) Specific Checks
+1. Check the PRI card/interface status on the EPBX system.
+2. Confirm channel status - if all channels show busy/unavailable but call volume is normal, this may indicate a signaling issue with the provider rather than a hardware fault.
+3. Test with a manual outbound call to confirm whether the issue is inbound-only, outbound-only, or both.
+
+Escalation:
+For confirmed provider-side WAN or PRI issues, log a ticket with the vendor immediately and keep the circuit ID and issue timestamp documented for SLA tracking purposes.

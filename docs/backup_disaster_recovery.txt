@@ -1,0 +1,27 @@
+Title: Backup Management and Disaster Recovery Procedure
+
+Purpose: Ensure critical business data (user files, Tally ERP data, email, databases) can be restored within an acceptable time window after data loss, hardware failure, or ransomware incident.
+
+Daily Backup Schedule:
+1. User share drives: incremental backup every night at 11:00 PM to a dedicated backup server or NAS.
+2. Full backup: performed weekly (Sunday night) to minimize recovery time from a single restore point.
+3. Tally ERP company data: backed up daily via Tally's built-in backup feature, exported to a separate drive outside the application server.
+4. Verify backup job completion each morning by checking the backup software's job log for success/failure status.
+
+Backup Storage Rule (3-2-1 principle):
+- Keep at least 3 copies of data.
+- Store on 2 different media types (e.g., local NAS + external drive).
+- Keep 1 copy offsite or in the cloud, disconnected from the main network (protects against ransomware spreading to backups).
+
+Disaster Recovery Steps (in case of server failure or data loss):
+1. Identify the most recent successful backup from the job log.
+2. Isolate the affected system from the network before restoring, if the cause was malware/ransomware.
+3. Restore data to a clean machine or rebuilt server.
+4. Verify data integrity (spot-check key files, confirm Tally company data opens correctly) before returning the system to production use.
+5. Document the incident: cause, downtime duration, data loss window, and corrective action to prevent recurrence.
+
+Testing:
+Perform a test restore quarterly to confirm backups are actually recoverable, not just "completing successfully" in the log. A backup that has never been test-restored should not be trusted.
+
+Escalation:
+If backup jobs fail for more than 2 consecutive nights, treat as a priority incident and investigate immediately rather than waiting for the next scheduled review.

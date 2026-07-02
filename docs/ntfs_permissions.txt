@@ -1,0 +1,27 @@
+Title: NTFS Permissions and Departmental Share Drive Management
+
+Issue: User cannot access a shared folder, or has more/less access than they should.
+
+Understanding the Two Layers:
+1. Share Permissions - control access at the network share level (Full Control, Change, Read).
+2. NTFS Permissions - control access at the file system level, and are more granular (Full Control, Modify, Read & Execute, List Folder Contents, Read, Write).
+Effective access is always the MORE RESTRICTIVE of the two layers combined.
+
+Common Setup for Departmental Share Drives:
+1. Create a security group per department in Active Directory (e.g., "SG-Accounts-Dept", "SG-Sales-Dept").
+2. Add users to the relevant security group rather than assigning permissions to individual user accounts directly - this makes future access changes much easier to manage.
+3. Assign NTFS permissions to the security group, not individual users, on the department's folder.
+4. Set Share Permissions to "Everyone: Full Control" and rely on NTFS permissions for actual access control (this is standard practice - NTFS is more granular and easier to audit).
+
+Troubleshooting Access Issues:
+1. Confirm which security groups the user is a member of (ADUC -> user properties -> Member Of tab).
+2. Check the NTFS permissions on the target folder (right-click -> Properties -> Security tab) to confirm the relevant group is listed with appropriate permissions.
+3. Remember that a "Deny" permission anywhere in the chain always overrides an "Allow" - check for accidental Deny entries first when access is unexpectedly blocked.
+4. If the user was recently added to a group, have them log off and back on (or restart the machine) since group membership tokens are cached at login.
+
+Disk Quota Management:
+- Set disk quotas at the folder or volume level via File Server Resource Manager (FSRM) to prevent one department from consuming all available storage.
+- Configure warning thresholds (e.g., notify at 80% usage) before hard limits are hit.
+
+Escalation:
+If permissions appear correct in ADUC and NTFS settings but access still fails, escalate to Tier 2 to check for permission inheritance being broken at a parent folder level.

@@ -1,0 +1,27 @@
+Title: Vendor Management and AMC (Annual Maintenance Contract) Renewal Procedure
+
+Purpose: Ensure continuous coverage for critical hardware/software (servers, network equipment, antivirus, EPBX, CCTV/DVR systems) without lapses that leave the business unsupported.
+
+IT Asset Lifecycle Tracking:
+1. Maintain a master asset register listing: asset name, serial number, purchase date, vendor, warranty/AMC expiry date, and assigned department/user.
+2. Review the asset register monthly to flag any AMC or warranty expiring within the next 60 days.
+
+AMC Renewal Process:
+1. 60 days before expiry: contact the vendor for a renewal quote and confirm continued coverage terms.
+2. Compare the renewal quote against at least one alternative vendor quote every 2-3 years (even for reliable existing vendors) to ensure competitive pricing.
+3. Get renewal approval from management/finance with sufficient lead time before the current contract lapses.
+4. Confirm renewed AMC coverage in writing (signed contract or PO) before the old contract expires - never let coverage lapse even for a few days on critical systems (server hardware, antivirus, backup systems).
+
+Procurement Process (New Hardware/Software):
+1. Identify requirement (based on asset aging, capacity needs, or new department setup).
+2. Obtain quotes from 2-3 vendors for comparison.
+3. Verify vendor reliability - check past support response times and reference from other clients if a new vendor.
+4. Route through management approval before purchase order issuance.
+5. On delivery, update the asset register immediately with new asset details and warranty start date.
+
+Software Licensing Compliance:
+- Maintain a separate license register (software name, license count, expiry, renewal cost) to avoid both under-licensing (compliance risk) and over-licensing (wasted cost).
+- Review license utilization annually - remove/reassign unused licenses before renewal to avoid paying for seats nobody uses.
+
+Escalation:
+If a critical system's AMC has lapsed unexpectedly (vendor error or missed renewal), treat as a priority item - arrange emergency short-term coverage or support if available, and document the process gap that caused the miss.
