@@ -1,0 +1,25 @@
+# Vector database (regenerated locally by running ingest.py — no need to commit it)
+chroma_db/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Virtual environments (if you create one later)
+venv/
+env/
+.venv/
+
+# Streamlit
+.streamlit/
+
+# OS-specific junk files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
